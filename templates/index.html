@@ -1,14 +1,47 @@
+{% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en" data-theme="light">
 <head>
-    <title>Blog List</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amul Sharma's Blog</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Blog List</h1>
-    <ul>
+    <nav class="nav-bar">
+        <h1>Amul Sharma's Blog</h1>
+        <div class="theme-switch">
+            <label class="switch">
+                <input type="checkbox" id="themeToggle">
+                <span class="slider">
+                    <!-- Light mode icon (Sun) -->
+                    <svg id="sunIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="display: none;">
+                        <path d="M8 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V.5A.5.5 0 0 1 8 0zm4.464 1.636a.5.5 0 0 1 .707.707l-.708.707A4.992 4.992 0 0 1 12 5.5a.5.5 0 0 1-1 0 3.992 3.992 0 0 0-1.414-2.828l-.707-.707a.5.5 0 0 1-.707.707l.707.707A4.992 4.992 0 0 1 11.5 8a.5.5 0 0 1-1 0A3.992 3.992 0 0 0 9 6.586l-.707-.707A.5.5 0 0 1 8 5.5a.5.5 0 0 1 .707-.707l.707.707A4.992 4.992 0 0 1 8 4a.5.5 0 0 1 0-1zM0 8a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1H.5A.5.5 0 0 1 0 8zm15 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1A.5.5 0 0 1 15 8zM3.536 3.536a.5.5 0 0 1 .707-.707l.707.707A4.992 4.992 0 0 1 5.5 4a.5.5 0 0 1 1 0A3.992 3.992 0 0 0 8 5.5a.5.5 0 0 1 .707.707l-.707.707A4.992 4.992 0 0 1 8 8a.5.5 0 0 1-1 0A3.992 3.992 0 0 0 6.586 6.586l-.707-.707a.5.5 0 0 1-.707 0zM8 12a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5z"/>
+                    </svg>
+            
+                    <!-- Dark mode icon (Moon) -->
+                    <svg id="moonIcon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="display: block;">
+                        <path d="M8 0a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V.5A.5.5 0 0 1 8 0zm4.464 1.636a.5.5 0 0 1 .707.707l-.708.707A4.992 4.992 0 0 1 12 5.5a.5.5 0 0 1-1 0 3.992 3.992 0 0 0-1.414-2.828l-.707-.707a.5.5 0 0 1-.707.707l.707.707A4.992 4.992 0 0 1 11.5 8a.5.5 0 0 1-1 0A3.992 3.992 0 0 0 9 6.586l-.707-.707A.5.5 0 0 1 8 5.5a.5.5 0 0 1 .707-.707l.707.707A4.992 4.992 0 0 1 8 4a.5.5 0 0 1 0-1zM0 8a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1H.5A.5.5 0 0 1 0 8zm15 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 0 1h-1A.5.5 0 0 1 15 8zM3.536 3.536a.5.5 0 0 1 .707-.707l.707.707A4.992 4.992 0 0 1 5.5 4a.5.5 0 0 1 1 0A3.992 3.992 0 0 0 8 5.5a.5.5 0 0 1 .707.707l-.707.707A4.992 4.992 0 0 1 8 8a.5.5 0 0 1-1 0A3.992 3.992 0 0 0 6.586 6.586l-.707-.707a.5.5 0 0 1-.707 0zM8 12a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0v-1a.5.5 0 0 1 .5-.5z"/>
+                    </svg>
+                </span>
+            </label>
+        </div>
+    </nav>
+
+
+    <div class="blog-grid">
         {% for blog in blogs %}
-            <li>{{ blog.title }} - {{ blog.content }}</li>
+        <div class="blog-card" id="blog-{{ forloop.counter }}">
+            <h3>{{ blog.title }}</h3>
+            <div class="post-date">📅 {{ blog.update_at|date:"F d, Y" }}</div>
+            <div class="blog-content">
+                {{ blog.content }}
+            </div>
+            <button class="read-more-btn" onclick="toggleReadMore({{ forloop.counter }})">Read More</button>
+        </div>
         {% endfor %}
-    </ul>
+    </div>
+
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
